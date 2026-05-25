@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>[TON NOM] — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=JetBrains+Mono:wght@300;400;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* =============== RESET & BASE =============== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0a0a0f;
+  --bg-2: #12121c;
+  --bg-card: #15151f;
+  --ink: #f5f5f0;
+  --ink-dim: #9a9aa8;
+  --accent: #d4ff3a;       /* vert néon */
+  --accent-2: #ff5c33;     /* orange */
+  --accent-3: #6a8cff;     /* bleu */
+  --line: rgba(255,255,255,0.08);
+  --display: 'Fraunces', serif;
+  --body: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =============== NAVIGATION =============== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: rgba(10, 10, 15, 0.7);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.logo span { color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.85rem;
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.nav-links a {
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.menu-toggle { display: none; background: none; border: none; color: var(--ink); cursor: pointer; }
+
+/* =============== HERO =============== */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  padding: 8rem 2.5rem 4rem;
+  gap: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212,255,58,0.12), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+.hero-text { position: relative; z-index: 2; }
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow::before {
+  content: ''; width: 30px; height: 1px; background: var(--accent);
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--ink-dim);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+}
+.hero-cta {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.btn {
+  padding: 1rem 1.75rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex; align-items: center; gap: 0.75rem;
+}
+.btn-primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.btn-primary:hover { background: transparent; color: var(--accent); transform: translateY(-2px); }
+.btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.btn .arrow { transition: transform 0.3s; }
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 3/4;
+  max-width: 480px;
+  justify-self: end;
+  opacity: 0; animation: fadeUp 1s 0.6s forwards;
+}
+.hero-photo {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--bg-2), var(--bg-card));
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--ink-dim);
+  text-align: center; padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212,255,58,0.03) 20px, rgba(212,255,58,0.03) 21px);
+}
+.hero-badge {
+  position: absolute;
+  bottom: -20px; left: -20px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 1rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Marquee */
+.marquee {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 0;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.marquee-track {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.marquee-track span { display: inline-flex; align-items: center; gap: 3rem; }
+.marquee-track .dot { color: var(--accent); font-style: normal; }
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* =============== SECTIONS =============== */
+section { padding: 8rem 2.5rem; position: relative; }
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 4rem;
+  gap: 2rem; flex-wrap: wrap;
+}
+.section-number {
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--ink-dim);
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+/* =============== À PROPOS =============== */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+  align-items: start;
+}
+.about-image {
+  aspect-ratio: 4/5;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink-dim);
+  padding: 2rem; text-align: center;
+  position: sticky; top: 100px;
+}
+.about-content p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--ink-dim);
+}
+.about-content p:first-child {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  color: var(--ink);
+  line-height: 1.4;
+  font-weight: 400;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+}
+.stat-num {
+  font-family: var(--display);
+  font-size: 3rem;
+  color: var(--accent);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+}
+
+/* =============== FORMATIONS / PARCOURS =============== */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.timeline-item {
+  position: relative;
+  padding: 2rem 0 2rem 3rem;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  transition: all 0.4s ease;
+}
+.timeline-item:hover { background: rgba(212,255,58,0.02); padding-left: 3.5rem; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem; top: 2.5rem;
+  width: 12px; height: 12px;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.timeline-item:hover::before { background: var(--accent); transform: scale(1.3); }
+.timeline-date {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.timeline-title {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.timeline-place {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+
+/* =============== COMPÉTENCES =============== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.skill-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { transform: translateY(-4px); border-color: rgba(212,255,58,0.3); }
+.skill-icon {
+  font-family: var(--display);
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  line-height: 1;
+}
+.skill-title {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.skill-desc {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.skill-tags {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.skill-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+
+/* =============== PROJETS =============== */
+.projects {
+  display: grid;
+  gap: 0;
+}
+.project {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  padding: 4rem 0;
+  border-top: 1px solid var(--line);
+  align-items: center;
+  transition: all 0.4s ease;
+}
+.project:last-child { border-bottom: 1px solid var(--line); }
+.project:hover .project-image { transform: scale(0.98); }
+.project:nth-child(even) { direction: rtl; }
+.project:nth-child(even) > * { direction: ltr; }
+.project-image {
+  aspect-ratio: 16/10;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink-dim);
+  padding: 2rem; text-align: center;
+  transition: transform 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+.project-image::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(212,255,58,0.08), transparent 70%);
+}
+.project-num {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+}
+.project-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  line-height: 1.05;
+}
+.project-desc {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.project-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+.project-meta strong { color: var(--ink); display: block; margin-bottom: 0.25rem; }
+.project-link {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: var(--mono); font-size: 0.85rem;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
+  transition: gap 0.3s;
+}
+.project-link:hover { gap: 1.25rem; }
+
+/* =============== EXPÉRIENCE =============== */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+.exp-card {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  transition: all 0.4s ease;
+  position: relative;
+}
+.exp-card:hover { border-color: rgba(212,255,58,0.3); transform: translateY(-4px); }
+.exp-date {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.exp-role {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.exp-company {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+.exp-desc {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+  line-height: 1.7;
+}
+
+/* =============== CENTRES D'INTÉRÊT =============== */
+.interests {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.interest {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.interest::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--accent);
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+.interest:hover::before { transform: translateY(0); }
+.interest:hover { color: var(--bg); border-color: var(--accent); }
+.interest > * { position: relative; z-index: 1; }
+.interest-icon {
+  font-family: var(--display);
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-style: italic;
+  transition: color 0.4s;
+}
+.interest:hover .interest-icon { color: var(--bg); }
+.interest-name {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* =============== CONTACT =============== */
+.contact {
+  text-align: center;
+  padding: 10rem 2.5rem;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+}
+.contact-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+.contact-title {
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+.contact-title em { font-style: italic; color: var(--accent); }
+.contact-email {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--ink-dim);
+  margin-bottom: 3rem;
+  display: inline-block;
+  border-bottom: 1px solid var(--ink-dim);
+  padding-bottom: 0.5rem;
+  transition: all 0.3s;
+}
+.contact-email:hover { color: var(--accent); border-color: var(--accent); }
+.contact-info {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+}
+.contact-info a { transition: color 0.3s; }
+.contact-info a:hover { color: var(--accent); }
+
+/* =============== FOOTER =============== */
+footer {
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-dim);
+  flex-wrap: wrap; gap: 1rem;
+}
+
+/* =============== SCROLL REVEAL =============== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* =============== RESPONSIVE =============== */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); flex-direction: column; padding: 2rem; border-bottom: 1px solid var(--line); }
+  .nav-links.open { display: flex; }
+  .menu-toggle { display: block; font-family: var(--mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; }
+  .hero { grid-template-columns: 1fr; padding: 7rem 1.25rem 3rem; gap: 3rem; }
+  .hero-visual { justify-self: start; max-width: 100%; }
+  section { padding: 5rem 1.25rem; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about-image { position: relative; top: 0; max-width: 300px; }
+  .about-stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  .timeline-item { grid-template-columns: 1fr; gap: 1rem; }
+  .project { grid-template-columns: 1fr; gap: 2rem; }
+  .project:nth-child(even) { direction: ltr; }
+  .contact { padding: 5rem 1.25rem; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- =============== NAVIGATION =============== -->
+<nav>
+  <div class="logo">[T]<span>.</span>[N]</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#accueil">Accueil</a>
+    <a href="#apropos">À propos</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#competences">Compétences</a>
+    <a href="#projets">Projets</a>
+    <a href="#experience">Expérience</a>
+    <a href="#interets">Intérêts</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">Menu</button>
+</nav>
+
+<!-- =============== HERO =============== -->
+<section class="hero" id="accueil">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Portfolio · Promotion 2022-2025</div>
+    <h1 class="hero-title">
+      [Prénom]<br />
+      <em>[Nom]</em>
+    </h1>
+    <p class="hero-subtitle">
+      [Une phrase d'accroche : ce que tu fais, ta spécialité, ton ambition.
+      Ex: Étudiant en BUT GEII passionné par les systèmes embarqués
+      et l'innovation industrielle.]
+    </p>
+    <div class="hero-cta">
+      <a href="#projets" class="btn btn-primary">Voir mes projets <span class="arrow">→</span></a>
+      <a href="#contact" class="btn">Me contacter</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-photo">
+      [PHOTO DE PROFIL<br />à insérer ici]
+    </div>
+    <div class="hero-badge">Disponible<br />Septembre 2025</div>
+  </div>
+</section>
+
+<!-- =============== MARQUEE =============== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>[Spécialité 1] <em class="dot">●</em> [Spécialité 2] <em class="dot">●</em> [Spécialité 3] <em class="dot">●</em> [Spécialité 4] <em class="dot">●</em> [Spécialité 5] <em class="dot">●</em></span>
+    <span>[Spécialité 1] <em class="dot">●</em> [Spécialité 2] <em class="dot">●</em> [Spécialité 3] <em class="dot">●</em> [Spécialité 4] <em class="dot">●</em> [Spécialité 5] <em class="dot">●</em></span>
+  </div>
+</div>
+
+<!-- =============== À PROPOS =============== -->
+<section id="apropos">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">01 — À propos</div>
+      <h2 class="section-title">Qui suis-<em>je</em>.</h2>
+    </div>
+    <p class="section-intro">[Une phrase courte qui résume ta personnalité et ton approche.]</p>
+  </div>
+
+  <div class="about reveal">
+    <div class="about-image">[PHOTO<br />à insérer]</div>
+    <div class="about-content">
+      <p>[Paragraphe d'accroche — qui tu es en une phrase forte. Ex: "Né à [ville], passionné depuis toujours par l'électronique et l'informatique, je transforme la complexité technique en solutions concrètes."]</p>
+      <p>[Paragraphe 2 — ton parcours en quelques lignes : pourquoi le BUT GEII, qu'est-ce qui t'a amené là, ce que tu cherches à apprendre.]</p>
+      <p>[Paragraphe 3 — tes qualités, ta manière de travailler, ce qui te différencie. Curiosité ? Rigueur ? Esprit d'équipe ?]</p>
+      <p>[Paragraphe 4 — tes ambitions, ton projet pour l'après-BUT.]</p>
+
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Années de BUT</div>
+        </div>
+        <div>
+          <div class="stat-num">[X]</div>
+          <div class="stat-label">Projets réalisés</div>
+        </div>
+        <div>
+          <div class="stat-num">[X]</div>
+          <div class="stat-label">Stages / Alternance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PARCOURS / FORMATIONS =============== -->
+<section id="parcours">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">02 — Parcours</div>
+      <h2 class="section-title">Mon <em>itinéraire</em>.</h2>
+    </div>
+    <p class="section-intro">[Petit texte d'intro sur ton parcours académique et professionnel.]</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">[2025 — 2028]</div>
+      <div>
+        <h3 class="timeline-title">[Diplôme suivant]</h3>
+        <p class="timeline-place">[École / Université — Ville]</p>
+      </div>
+      <p class="timeline-desc">[Description de la formation, spécialité, ce que tu y apprends.]</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-date">2022 — 2025</div>
+      <div>
+        <h3 class="timeline-title">BUT GEII</h3>
+        <p class="timeline-place">[IUT — Ville]</p>
+      </div>
+      <p class="timeline-desc">[Parcours suivi (ex: Électronique et Systèmes Embarqués), matières principales, ce que tu retiens.]</p>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-date">[Année]</div>
+      <div>
+        <h3 class="timeline-title">Baccalauréat [Type]</h3>
+        <p class="timeline-place">[Lycée — Ville]</p>
+      </div>
+      <p class="timeline-desc">[Spécialités, options, mentions, mention bilangue, etc.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== COMPÉTENCES =============== -->
+<section id="competences">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">03 — Compétences</div>
+      <h2 class="section-title">Ce que je <em>sais faire</em>.</h2>
+    </div>
+    <p class="section-intro">[Phrase d'intro — les 4 grands axes du référentiel BUT GEII.]</p>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">01</div>
+      <h3 class="skill-title">Concevoir</h3>
+      <p class="skill-desc">[Description de ce que recouvre cette compétence pour toi. Schémas, simulation, conception de cartes, etc.]</p>
+      <div class="skill-tags">
+        <span class="skill-tag">[Outil 1]</span>
+        <span class="skill-tag">[Outil 2]</span>
+        <span class="skill-tag">[Outil 3]</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">02</div>
+      <h3 class="skill-title">Vérifier</h3>
+      <p class="skill-desc">[Description — tests, mesures, validation, instrumentation.]</p>
+      <div class="skill-tags">
+        <span class="skill-tag">[Outil 1]</span>
+        <span class="skill-tag">[Outil 2]</span>
+        <span class="skill-tag">[Outil 3]</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">03</div>
+      <h3 class="skill-title">Maintenir</h3>
+      <p class="skill-desc">[Description — diagnostic, dépannage, suivi de systèmes en service.]</p>
+      <div class="skill-tags">
+        <span class="skill-tag">[Outil 1]</span>
+        <span class="skill-tag">[Outil 2]</span>
+        <span class="skill-tag">[Outil 3]</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">04</div>
+      <h3 class="skill-title">Implanter</h3>
+      <p class="skill-desc">[Description — installation, intégration, mise en service sur site industriel.]</p>
+      <div class="skill-tags">
+        <span class="skill-tag">[Outil 1]</span>
+        <span class="skill-tag">[Outil 2]</span>
+        <span class="skill-tag">[Outil 3]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== PROJETS =============== -->
+<section id="projets">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">04 — Projets</div>
+      <h2 class="section-title">Sélection de <em>réalisations</em>.</h2>
+    </div>
+    <p class="section-intro">[Phrase d'intro — projets académiques, personnels, en entreprise…]</p>
+  </div>
+
+  <div class="projects">
+
+    <div class="project reveal">
+      <div class="project-image">[VISUEL PROJET 01<br />à insérer]</div>
+      <div>
+        <div class="project-num">/ Projet 01</div>
+        <h3 class="project-title">[Titre du projet]</h3>
+        <p class="project-desc">[Description du projet : contexte, objectif, ton rôle, ce que tu en as retiré. 3-4 lignes idéalement.]</p>
+        <div class="project-meta">
+          <div><strong>Année</strong>[2024]</div>
+          <div><strong>Équipe</strong>[Solo / 4 pers.]</div>
+          <div><strong>Stack</strong>[Outils]</div>
+        </div>
+        <a href="#" class="project-link">En savoir plus →</a>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-image">[VISUEL PROJET 02<br />à insérer]</div>
+      <div>
+        <div class="project-num">/ Projet 02</div>
+        <h3 class="project-title">[Titre du projet]</h3>
+        <p class="project-desc">[Description du projet.]</p>
+        <div class="project-meta">
+          <div><strong>Année</strong>[2024]</div>
+          <div><strong>Équipe</strong>[X pers.]</div>
+          <div><strong>Stack</strong>[Outils]</div>
+        </div>
+        <a href="#" class="project-link">En savoir plus →</a>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-image">[VISUEL PROJET 03<br />à insérer]</div>
+      <div>
+        <div class="project-num">/ Projet 03</div>
+        <h3 class="project-title">[Titre du projet]</h3>
+        <p class="project-desc">[Description du projet.]</p>
+        <div class="project-meta">
+          <div><strong>Année</strong>[2023]</div>
+          <div><strong>Équipe</strong>[X pers.]</div>
+          <div><strong>Stack</strong>[Outils]</div>
+        </div>
+        <a href="#" class="project-link">En savoir plus →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============== EXPÉRIENCE =============== -->
+<section id="experience">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">05 — Expérience</div>
+      <h2 class="section-title">Vie <em>professionnelle</em>.</h2>
+    </div>
+    <p class="section-intro">[Stages, alternances, jobs étudiants — ce qui t'a construit.]</p>
+  </div>
+
+  <div class="experience-grid">
+
+    <div class="exp-card reveal">
+      <div class="exp-date">[2023 — 2025]</div>
+      <h3 class="exp-role">[Poste]</h3>
+      <p class="exp-company">[Entreprise]</p>
+      <p class="exp-desc">[Missions confiées, ce que tu as appris, projets sur lesquels tu as travaillé.]</p>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-date">[Année]</div>
+      <h3 class="exp-role">[Poste]</h3>
+      <p class="exp-company">[Entreprise]</p>
+      <p class="exp-desc">[Description de l'expérience.]</p>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-date">[Année]</div>
+      <h3 class="exp-role">[Poste]</h3>
+      <p class="exp-company">[Entreprise]</p>
+      <p class="exp-desc">[Description de l'expérience.]</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============== CENTRES D'INTÉRÊT =============== -->
+<section id="interets">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">06 — Centres d'intérêt</div>
+      <h2 class="section-title">Hors du <em>circuit</em>.</h2>
+    </div>
+    <p class="section-intro">[Ce que tu fais en dehors des études — passions, sports, engagements.]</p>
+  </div>
+
+  <div class="interests">
+    <div class="interest reveal">
+      <div class="interest-icon">♫</div>
+      <div class="interest-name">[Intérêt 1]</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">⚙</div>
+      <div class="interest-name">[Intérêt 2]</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">✦</div>
+      <div class="interest-name">[Intérêt 3]</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">▲</div>
+      <div class="interest-name">[Intérêt 4]</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">○</div>
+      <div class="interest-name">[Intérêt 5]</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">✕</div>
+      <div class="interest-name">[Intérêt 6]</div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== CONTACT =============== -->
+<section class="contact" id="contact">
+  <div class="contact-eyebrow reveal">07 — On se parle ?</div>
+  <h2 class="contact-title reveal">Travaillons <em>ensemble</em>.</h2>
+  <a href="mailto:[ton@email.fr]" class="contact-email reveal">[ton@email.fr]</a>
+  <div class="contact-info reveal">
+    <span>[+33 X XX XX XX XX]</span>
+    <a href="#">LinkedIn ↗</a>
+    <a href="#">GitHub ↗</a>
+    <a href="#">CV ↗</a>
+  </div>
+</section>
+
+<!-- =============== FOOTER =============== -->
+<footer>
+  <div>© 2025 [Ton nom]. Tous droits réservés.</div>
+  <div>Portfolio · BUT GEII · Promotion 2022-2025</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Cacher le menu mobile au clic sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>
