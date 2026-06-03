@@ -199,9 +199,16 @@ nav {
   font-family: var(--mono);
   font-size: 0.8rem;
   color: var(--ink-dim-light);
-  text-align: center; padding: 2rem;
+  text-align: center; padding: 0;
   position: relative;
   overflow: hidden;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
 }
 .hero-photo::after {
   content: '';
@@ -803,7 +810,7 @@ footer {
   </div>
   <div class="hero-visual">
     <div class="hero-photo">
-      [PHOTO DE PROFIL<br />à insérer ici]
+      <img src="photo-profil.jpg" alt="Lehyan Nouioui-Chared" />
     </div>
     <div class="hero-badge">En alternance<br />Sagemcom · 2025-2026</div>
   </div>
@@ -1098,7 +1105,7 @@ footer {
   <div class="contact-info reveal">
     <span>+33 6 51 28 88 74</span>
     <span>Brest · France</span>
-    <a href="#">LinkedIn ↗</a>
+    <a href="https://www.linkedin.com/in/lehyan-nouioui-chared-154673297/" target="_blank" rel="noopener">LinkedIn ↗</a>
     <a href="cv-lehyan.pdf" target="_blank" rel="noopener">CV ↗</a>
   </div>
 </section>
