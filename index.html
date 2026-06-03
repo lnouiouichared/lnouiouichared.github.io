@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lehyan NOUIOUI--CHARED — Portfolio</title>
+<title>Lehyan Nouioui-Chared — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,400&family=JetBrains+Mono:wght@300;400;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,15 +11,19 @@
 /* =============== RESET & BASE =============== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #0a0a0f;
-  --bg-2: #12121c;
-  --bg-card: #15151f;
-  --ink: #f5f5f0;
-  --ink-dim: #9a9aa8;
-  --accent: #d4ff3a;       /* vert néon */
-  --accent-2: #ff5c33;     /* orange */
-  --accent-3: #6a8cff;     /* bleu */
-  --line: rgba(255,255,255,0.08);
+  --bg: #f4f1ea;           /* crème chaud */
+  --bg-2: #ffffff;         /* blanc pur */
+  --bg-card: #ffffff;
+  --bg-dark: #0a0e1a;      /* sections sombres pour rythme */
+  --ink: #0a0e1a;          /* texte foncé */
+  --ink-light: #f5f7fa;    /* texte sur fond sombre */
+  --ink-dim: #5a6378;      /* texte secondaire */
+  --ink-dim-light: #9ca3b8;/* texte secondaire sur sombre */
+  --accent: #0066ff;       /* bleu électrique */
+  --accent-2: #ff8a00;     /* ambre énergie */
+  --accent-3: #ff5c33;     /* orange industriel */
+  --line: rgba(10, 14, 26, 0.1);
+  --line-light: rgba(255, 255, 255, 0.12);
   --display: 'Fraunces', serif;
   --body: 'Space Grotesk', sans-serif;
   --mono: 'JetBrains Mono', monospace;
@@ -56,7 +60,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(12px);
-  background: rgba(10, 10, 15, 0.7);
+  background: rgba(244, 241, 234, 0.85);
   border-bottom: 1px solid var(--line);
 }
 .logo {
@@ -108,8 +112,17 @@ nav {
   position: absolute;
   top: 20%; right: -10%;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(212,255,58,0.12), transparent 70%);
+  background: radial-gradient(circle, rgba(0,102,255,0.18), transparent 70%);
   filter: blur(40px);
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; left: -5%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,138,0,0.15), transparent 70%);
+  filter: blur(60px);
   z-index: 0;
 }
 .hero-text { position: relative; z-index: 2; }
@@ -180,12 +193,12 @@ nav {
 }
 .hero-photo {
   width: 100%; height: 100%;
-  background: linear-gradient(135deg, var(--bg-2), var(--bg-card));
+  background: linear-gradient(135deg, #1a1f2e, var(--bg-dark));
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
   font-family: var(--mono);
   font-size: 0.8rem;
-  color: var(--ink-dim);
+  color: var(--ink-dim-light);
   text-align: center; padding: 2rem;
   position: relative;
   overflow: hidden;
@@ -193,7 +206,7 @@ nav {
 .hero-photo::after {
   content: '';
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212,255,58,0.03) 20px, rgba(212,255,58,0.03) 21px);
+  background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,102,255,0.03) 20px, rgba(0,102,255,0.03) 21px);
 }
 .hero-badge {
   position: absolute;
@@ -219,11 +232,12 @@ nav {
 
 /* Marquee */
 .marquee {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--bg-dark);
+  border-bottom: 1px solid var(--bg-dark);
   padding: 1.5rem 0;
   overflow: hidden;
-  background: var(--bg-2);
+  background: var(--bg-dark);
+  color: var(--ink-light);
 }
 .marquee-track {
   display: flex;
@@ -244,6 +258,20 @@ nav {
 
 /* =============== SECTIONS =============== */
 section { padding: 8rem 2.5rem; position: relative; }
+
+/* Section sombre — rupture rythmique */
+.section-dark {
+  background: var(--bg-dark);
+  color: var(--ink-light);
+}
+.section-dark .section-intro { color: var(--ink-dim-light); }
+.section-dark .timeline-desc,
+.section-dark .skill-desc,
+.section-dark .exp-desc { color: var(--ink-dim-light); }
+.section-dark .skill-tag { color: var(--ink-dim-light); border-color: var(--line-light); }
+.section-dark .skill-card { background: #141a2b; border-color: var(--line-light); }
+.section-dark .skill-card .skill-title { color: var(--ink-light); }
+
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -283,10 +311,10 @@ section { padding: 8rem 2.5rem; position: relative; }
 }
 .about-image {
   aspect-ratio: 4/5;
-  background: var(--bg-2);
+  background: var(--bg-dark);
   border: 1px solid var(--line);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 0.8rem; color: var(--ink-dim);
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink-dim-light);
   padding: 2rem; text-align: center;
   position: sticky; top: 100px;
 }
@@ -349,7 +377,7 @@ section { padding: 8rem 2.5rem; position: relative; }
   align-items: start;
   transition: all 0.4s ease;
 }
-.timeline-item:hover { background: rgba(212,255,58,0.02); padding-left: 3.5rem; }
+.timeline-item:hover { background: rgba(0,102,255,0.02); padding-left: 3.5rem; }
 .timeline-item::before {
   content: '';
   position: absolute;
@@ -412,7 +440,7 @@ section { padding: 8rem 2.5rem; position: relative; }
   transition: transform 0.4s ease;
 }
 .skill-card:hover::before { transform: scaleX(1); }
-.skill-card:hover { transform: translateY(-4px); border-color: rgba(212,255,58,0.3); }
+.skill-card:hover { transform: translateY(-4px); border-color: rgba(0,102,255,0.3); }
 .skill-icon {
   font-family: var(--display);
   font-size: 3rem;
@@ -478,7 +506,7 @@ section { padding: 8rem 2.5rem; position: relative; }
 .project-image::before {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(212,255,58,0.08), transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(0,102,255,0.08), transparent 70%);
 }
 .project-num {
   font-family: var(--mono);
@@ -536,7 +564,7 @@ section { padding: 8rem 2.5rem; position: relative; }
   transition: all 0.4s ease;
   position: relative;
 }
-.exp-card:hover { border-color: rgba(212,255,58,0.3); transform: translateY(-4px); }
+.exp-card:hover { border-color: rgba(0,102,255,0.3); transform: translateY(-4px); }
 .exp-date {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -613,7 +641,8 @@ section { padding: 8rem 2.5rem; position: relative; }
 .contact {
   text-align: center;
   padding: 10rem 2.5rem;
-  background: var(--bg-2);
+  background: var(--bg-dark);
+  color: var(--ink-light);
   border-top: 1px solid var(--line);
 }
 .contact-eyebrow {
@@ -704,7 +733,7 @@ footer {
 
 <!-- =============== NAVIGATION =============== -->
 <nav>
-  <div class="logo">[L]<span>.</span>[NC]</div>
+  <div class="logo">L<span>.</span>N</div>
   <div class="nav-links" id="navLinks">
     <a href="#accueil">Accueil</a>
     <a href="#apropos">À propos</a>
@@ -721,15 +750,15 @@ footer {
 <!-- =============== HERO =============== -->
 <section class="hero" id="accueil">
   <div class="hero-text">
-    <div class="hero-eyebrow">Portfolio · Promotion 2022-2026</div>
+    <div class="hero-eyebrow">Portfolio · BUT GEII · Promotion 2023-2026</div>
     <h1 class="hero-title">
       Lehyan<br />
-      <em>NOUIOUI- -CHARED</em>
+      <em>Nouioui-Chared</em>
     </h1>
     <p class="hero-subtitle">
-      [Une phrase d'accroche : ce que tu fais, ta spécialité, ton ambition.
-      Ex: Étudiant en BUT GEII passionné par les systèmes embarqués
-      et l'innovation industrielle.]
+      Étudiant en 3<sup>e</sup> année de BUT GEII, parcours Automatismes
+      et Informatique Industrielle. Je conçois, programme et fiabilise
+      les systèmes qui pilotent l'industrie — du capteur à la mise en service.
     </p>
     <div class="hero-cta">
       <a href="#projets" class="btn btn-primary">Voir mes projets <span class="arrow">→</span></a>
@@ -740,15 +769,15 @@ footer {
     <div class="hero-photo">
       [PHOTO DE PROFIL<br />à insérer ici]
     </div>
-    <div class="hero-badge">Disponible<br />Septembre 2025</div>
+    <div class="hero-badge">En alternance<br />Sagemcom · 2025-2026</div>
   </div>
 </section>
 
 <!-- =============== MARQUEE =============== -->
 <div class="marquee">
   <div class="marquee-track">
-    <span>[Spécialité 1] <em class="dot">●</em> [Spécialité 2] <em class="dot">●</em> [Spécialité 3] <em class="dot">●</em> [Spécialité 4] <em class="dot">●</em> [Spécialité 5] <em class="dot">●</em></span>
-    <span>[Spécialité 1] <em class="dot">●</em> [Spécialité 2] <em class="dot">●</em> [Spécialité 3] <em class="dot">●</em> [Spécialité 4] <em class="dot">●</em> [Spécialité 5] <em class="dot">●</em></span>
+    <span>Automatisme <em class="dot">●</em> Schneider <em class="dot">●</em> Siemens TIA Portal <em class="dot">●</em> FANUC <em class="dot">●</em> ABB RAPID <em class="dot">●</em> Vision Keyence <em class="dot">●</em> ISO 13849-1 <em class="dot">●</em> C/C++ <em class="dot">●</em> Python <em class="dot">●</em></span>
+    <span>Automatisme <em class="dot">●</em> Schneider <em class="dot">●</em> Siemens TIA Portal <em class="dot">●</em> FANUC <em class="dot">●</em> ABB RAPID <em class="dot">●</em> Vision Keyence <em class="dot">●</em> ISO 13849-1 <em class="dot">●</em> C/C++ <em class="dot">●</em> Python <em class="dot">●</em></span>
   </div>
 </div>
 
@@ -759,16 +788,16 @@ footer {
       <div class="section-number">01 — À propos</div>
       <h2 class="section-title">Qui suis-<em>je</em>.</h2>
     </div>
-    <p class="section-intro">[Une phrase courte qui résume ta personnalité et ton approche.]</p>
+    <p class="section-intro">Rigoureux, curieux, autonome — j'aime comprendre les systèmes en profondeur avant de les améliorer.</p>
   </div>
 
   <div class="about reveal">
     <div class="about-image">[PHOTO<br />à insérer]</div>
     <div class="about-content">
-      <p>[Paragraphe d'accroche — qui tu es en une phrase forte. Ex: "Né à [ville], passionné depuis toujours par l'électronique et l'informatique, je transforme la complexité technique en solutions concrètes."]</p>
-      <p>[Paragraphe 2 — ton parcours en quelques lignes : pourquoi le BUT GEII, qu'est-ce qui t'a amené là, ce que tu cherches à apprendre.]</p>
-      <p>[Paragraphe 3 — tes qualités, ta manière de travailler, ce qui te différencie. Curiosité ? Rigueur ? Esprit d'équipe ?]</p>
-      <p>[Paragraphe 4 — tes ambitions, ton projet pour l'après-BUT.]</p>
+      <p>Étudiant en 3<sup>e</sup> année de BUT GEII à l'IUT de Brest-Morlaix, je me spécialise en Automatismes et Informatique Industrielle.</p>
+      <p>Mon parcours, à la croisée de l'électronique, de la programmation et de la mécanique industrielle, m'a appris à intervenir sur toute la chaîne : du choix des composants à la mise en service, en passant par la programmation d'automates, la robotique, la sécurité machine et la maintenance.</p>
+      <p>Je suis actuellement en alternance chez <strong>Sagemcom MEI</strong>, où je participe à la fabrication et l'optimisation de prototypes de compteurs d'eau intelligents — un terrain idéal pour confronter la théorie à la réalité industrielle.</p>
+      <p>Ce que je cherche : continuer à monter en compétence sur des projets concrets, en équipe, avec l'envie d'apporter des solutions qui tiennent la route — du schéma au câblage, du code au produit fini.</p>
 
       <div class="about-stats">
         <div>
@@ -776,12 +805,12 @@ footer {
           <div class="stat-label">Années de BUT</div>
         </div>
         <div>
-          <div class="stat-num">[X]</div>
-          <div class="stat-label">Projets réalisés</div>
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Projets techniques</div>
         </div>
         <div>
-          <div class="stat-num">[X]</div>
-          <div class="stat-label">Stages / Alternance</div>
+          <div class="stat-num">1</div>
+          <div class="stat-label">Alternance en cours</div>
         </div>
       </div>
     </div>
@@ -795,91 +824,92 @@ footer {
       <div class="section-number">02 — Parcours</div>
       <h2 class="section-title">Mon <em>itinéraire</em>.</h2>
     </div>
-    <p class="section-intro">[Petit texte d'intro sur ton parcours académique et professionnel.]</p>
+    <p class="section-intro">De la classe de Terminale à l'automatisme industriel — un parcours pensé pour mettre les mains dans le concret.</p>
   </div>
 
   <div class="timeline">
     <div class="timeline-item reveal">
-      <div class="timeline-date">[2025 — 2028]</div>
+      <div class="timeline-date">2025 — 2026</div>
       <div>
-        <h3 class="timeline-title">[Diplôme suivant]</h3>
-        <p class="timeline-place">[École / Université — Ville]</p>
+        <h3 class="timeline-title">BUT GEII — 3<sup>e</sup> année</h3>
+        <p class="timeline-place">IUT Brest-Morlaix · Parcours AII</p>
       </div>
-      <p class="timeline-desc">[Description de la formation, spécialité, ce que tu y apprends.]</p>
+      <p class="timeline-desc">Spécialisation Automatismes et Informatique Industrielle. Approfondissement de la programmation d'automates (Schneider, Siemens), de la robotique industrielle (FANUC, ABB) et de la sécurité machine.</p>
     </div>
 
     <div class="timeline-item reveal">
-      <div class="timeline-date">2022 — 2026</div>
+      <div class="timeline-date">2023 — 2025</div>
       <div>
-        <h3 class="timeline-title">BUT GEII</h3>
-        <p class="timeline-place">[IUT — Ville]</p>
+        <h3 class="timeline-title">BUT GEII — 1<sup>re</sup> et 2<sup>e</sup> années</h3>
+        <p class="timeline-place">IUT Brest-Morlaix</p>
       </div>
-      <p class="timeline-desc">[Parcours suivi (ex: Électronique et Systèmes Embarqués), matières principales, ce que tu retiens.]</p>
+      <p class="timeline-desc">Acquisition des fondamentaux du génie électrique : électronique analogique et numérique, automatique, capteurs, informatique industrielle, électrotechnique et conception de systèmes.</p>
     </div>
 
     <div class="timeline-item reveal">
       <div class="timeline-date">[Année]</div>
       <div>
-        <h3 class="timeline-title">Baccalauréat [Type]</h3>
+        <h3 class="timeline-title">Baccalauréat [Type / Spécialités]</h3>
         <p class="timeline-place">[Lycée — Ville]</p>
       </div>
-      <p class="timeline-desc">[Spécialités, options, mentions, mention bilangue, etc.]</p>
+      <p class="timeline-desc">[Spécialités, options, mention éventuelle. À compléter.]</p>
     </div>
   </div>
 </section>
 
 <!-- =============== COMPÉTENCES =============== -->
-<section id="competences">
+<section id="competences" class="section-dark">
   <div class="section-header reveal">
     <div>
       <div class="section-number">03 — Compétences</div>
       <h2 class="section-title">Ce que je <em>sais faire</em>.</h2>
     </div>
-    <p class="section-intro">[Phrase d'intro — les 4 grands axes du référentiel BUT GEII.]</p>
+    <p class="section-intro">Les 4 axes du référentiel BUT GEII — Concevoir, Vérifier, Maintenir, Implanter — déclinés avec les outils que j'utilise au quotidien.</p>
   </div>
 
   <div class="skills-grid">
     <div class="skill-card reveal">
       <div class="skill-icon">01</div>
       <h3 class="skill-title">Concevoir</h3>
-      <p class="skill-desc">[Description de ce que recouvre cette compétence pour toi. Schémas, simulation, conception de cartes, etc.]</p>
+      <p class="skill-desc">Spécification fonctionnelle, choix des composants (capteurs, contacteurs, protections), conception d'architectures matérielles et logicielles, rédaction et révision de schémas électriques.</p>
       <div class="skill-tags">
-        <span class="skill-tag">[Outil 1]</span>
-        <span class="skill-tag">[Outil 2]</span>
-        <span class="skill-tag">[Outil 3]</span>
+        <span class="skill-tag">Schémas élec.</span>
+        <span class="skill-tag">Architecture HW/SW</span>
+        <span class="skill-tag">Sélection composants</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">02</div>
       <h3 class="skill-title">Vérifier</h3>
-      <p class="skill-desc">[Description — tests, mesures, validation, instrumentation.]</p>
+      <p class="skill-desc">Mesures électriques, contrôles de validation à l'aide des instruments adaptés, lecture et vérification de schémas et plans de câblage avant mise sous tension.</p>
       <div class="skill-tags">
-        <span class="skill-tag">[Outil 1]</span>
-        <span class="skill-tag">[Outil 2]</span>
-        <span class="skill-tag">[Outil 3]</span>
+        <span class="skill-tag">Multimètre</span>
+        <span class="skill-tag">Validation</span>
+        <span class="skill-tag">Sécurité élec.</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">03</div>
       <h3 class="skill-title">Maintenir</h3>
-      <p class="skill-desc">[Description — diagnostic, dépannage, suivi de systèmes en service.]</p>
+      <p class="skill-desc">Maintenance préventive et corrective sur lignes de production, diagnostic de pannes, optimisations matérielles et logicielles pour améliorer la performance des systèmes en service.</p>
       <div class="skill-tags">
-        <span class="skill-tag">[Outil 1]</span>
-        <span class="skill-tag">[Outil 2]</span>
-        <span class="skill-tag">[Outil 3]</span>
+        <span class="skill-tag">Diagnostic</span>
+        <span class="skill-tag">Maint. préventive</span>
+        <span class="skill-tag">Optimisation</span>
       </div>
     </div>
 
     <div class="skill-card reveal">
       <div class="skill-icon">04</div>
       <h3 class="skill-title">Implanter</h3>
-      <p class="skill-desc">[Description — installation, intégration, mise en service sur site industriel.]</p>
+      <p class="skill-desc">Câblage et assemblage d'armoires électriques, programmation d'automates (Schneider, Siemens), programmation de robots industriels (ABB, FANUC), mise en service et sécurisation machine selon ISO 13849-1.</p>
       <div class="skill-tags">
-        <span class="skill-tag">[Outil 1]</span>
-        <span class="skill-tag">[Outil 2]</span>
-        <span class="skill-tag">[Outil 3]</span>
+        <span class="skill-tag">TIA Portal</span>
+        <span class="skill-tag">Machine Expert</span>
+        <span class="skill-tag">ABB RAPID</span>
+        <span class="skill-tag">FANUC</span>
       </div>
     </div>
   </div>
@@ -892,7 +922,7 @@ footer {
       <div class="section-number">04 — Projets</div>
       <h2 class="section-title">Sélection de <em>réalisations</em>.</h2>
     </div>
-    <p class="section-intro">[Phrase d'intro — projets académiques, personnels, en entreprise…]</p>
+    <p class="section-intro">Projets académiques et industriels où j'ai pu mettre en pratique l'ensemble de la chaîne — de la conception à la mise en service.</p>
   </div>
 
   <div class="projects">
@@ -901,12 +931,12 @@ footer {
       <div class="project-image">[VISUEL PROJET 01<br />à insérer]</div>
       <div>
         <div class="project-num">/ Projet 01</div>
-        <h3 class="project-title">[Titre du projet]</h3>
-        <p class="project-desc">[Description du projet : contexte, objectif, ton rôle, ce que tu en as retiré. 3-4 lignes idéalement.]</p>
+        <h3 class="project-title">Cellule robotique de tri sécurisée</h3>
+        <p class="project-desc">Refonte et sécurisation d'une cellule robotique de tri équipée d'un robot ABB SCARA et d'un système de vision Keyence. Programmation des trajectoires pick-and-place, calibration du système de vision XG-035C pour la reconnaissance et le tri par catégorie, conception et mise en place du dispositif de sécurité (barrières immatérielles, relais de sécurité) dans le respect de la norme ISO 13849-1.</p>
         <div class="project-meta">
-          <div><strong>Année</strong>[2024]</div>
-          <div><strong>Équipe</strong>[Solo / 4 pers.]</div>
-          <div><strong>Stack</strong>[Outils]</div>
+          <div><strong>Année</strong>2024-2025</div>
+          <div><strong>Contexte</strong>Projet IUT</div>
+          <div><strong>Stack</strong>ABB RAPID · Keyence</div>
         </div>
         <a href="#" class="project-link">En savoir plus →</a>
       </div>
@@ -916,12 +946,12 @@ footer {
       <div class="project-image">[VISUEL PROJET 02<br />à insérer]</div>
       <div>
         <div class="project-num">/ Projet 02</div>
-        <h3 class="project-title">[Titre du projet]</h3>
-        <p class="project-desc">[Description du projet.]</p>
+        <h3 class="project-title">Système de tri de pièces automatisé</h3>
+        <p class="project-desc">Conception et réalisation complète d'un système automatisé de tri de pièces. Spécification et choix des composants (capteurs, contacteurs, etc.) en fonction des exigences fonctionnelles, conception de l'architecture matérielle et logicielle, vérification des mesures électriques et maintenance corrective avec mise à jour des schémas et de la documentation.</p>
         <div class="project-meta">
-          <div><strong>Année</strong>[2024]</div>
-          <div><strong>Équipe</strong>[X pers.]</div>
-          <div><strong>Stack</strong>[Outils]</div>
+          <div><strong>Année</strong>2023-2024</div>
+          <div><strong>Contexte</strong>Projet IUT</div>
+          <div><strong>Stack</strong>Automatisme · Capteurs</div>
         </div>
         <a href="#" class="project-link">En savoir plus →</a>
       </div>
@@ -931,12 +961,12 @@ footer {
       <div class="project-image">[VISUEL PROJET 03<br />à insérer]</div>
       <div>
         <div class="project-num">/ Projet 03</div>
-        <h3 class="project-title">[Titre du projet]</h3>
-        <p class="project-desc">[Description du projet.]</p>
+        <h3 class="project-title">Câblage d'une armoire électrique</h3>
+        <p class="project-desc">Câblage et assemblage d'une armoire électrique à partir de schémas et de plans de câblage. Lecture et interprétation des schémas, identification de chacun des composants (puissance, commande, protections), contrôles et validations avec les instruments adaptés, dans le respect strict des règles de sécurité électrique.</p>
         <div class="project-meta">
-          <div><strong>Année</strong>[2023]</div>
-          <div><strong>Équipe</strong>[X pers.]</div>
-          <div><strong>Stack</strong>[Outils]</div>
+          <div><strong>Année</strong>2023-2024</div>
+          <div><strong>Contexte</strong>Projet IUT</div>
+          <div><strong>Stack</strong>Câblage · Mesures</div>
         </div>
         <a href="#" class="project-link">En savoir plus →</a>
       </div>
@@ -952,30 +982,30 @@ footer {
       <div class="section-number">05 — Expérience</div>
       <h2 class="section-title">Vie <em>professionnelle</em>.</h2>
     </div>
-    <p class="section-intro">[Stages, alternances, jobs étudiants — ce qui t'a construit.]</p>
+    <p class="section-intro">L'alternance, c'est là que tout se confronte au réel. Voici l'expérience qui structure mon parcours pro.</p>
   </div>
 
   <div class="experience-grid">
 
     <div class="exp-card reveal">
-      <div class="exp-date">[2023 — 2025]</div>
-      <h3 class="exp-role">[Poste]</h3>
-      <p class="exp-company">[Entreprise]</p>
-      <p class="exp-desc">[Missions confiées, ce que tu as appris, projets sur lesquels tu as travaillé.]</p>
+      <div class="exp-date">Juin 2025 — Présent</div>
+      <h3 class="exp-role">Stage puis alternance — Production & Maintenance</h3>
+      <p class="exp-company">Sagemcom MEI</p>
+      <p class="exp-desc">Co-gestion de la fabrication de prototypes de compteurs d'eau intelligents. Coordination avec les équipes d'ingénierie de Paris et Tunis sur les évolutions de production et la résolution d'incidents. Maintenance préventive et corrective, livraison d'optimisations matérielles et logicielles pour améliorer la performance de la ligne.</p>
     </div>
 
     <div class="exp-card reveal">
-      <div class="exp-date">[Année]</div>
-      <h3 class="exp-role">[Poste]</h3>
-      <p class="exp-company">[Entreprise]</p>
-      <p class="exp-desc">[Description de l'expérience.]</p>
+      <div class="exp-date">En cours</div>
+      <h3 class="exp-role">Pré-habilitation électrique</h3>
+      <p class="exp-company">Niveaux B1V / B2V / BR</p>
+      <p class="exp-desc">Formation à l'intervention en basse tension : travaux d'ordre électrique, opérations de mesurage et essais, dépannage et consignation. Indispensable pour intervenir en toute sécurité sur des installations industrielles sous tension ou hors tension.</p>
     </div>
 
     <div class="exp-card reveal">
-      <div class="exp-date">[Année]</div>
-      <h3 class="exp-role">[Poste]</h3>
-      <p class="exp-company">[Entreprise]</p>
-      <p class="exp-desc">[Description de l'expérience.]</p>
+      <div class="exp-date">Certifié</div>
+      <h3 class="exp-role">PSC1 — Premiers secours</h3>
+      <p class="exp-company">Prévention et Secours Civiques niveau 1</p>
+      <p class="exp-desc">Formation aux gestes qui sauvent : protéger, alerter, secourir. Une compétence transversale, particulièrement utile en environnement industriel où les risques (électriques, mécaniques, chimiques) sont présents au quotidien.</p>
     </div>
 
   </div>
@@ -988,33 +1018,33 @@ footer {
       <div class="section-number">06 — Centres d'intérêt</div>
       <h2 class="section-title">Hors du <em>circuit</em>.</h2>
     </div>
-    <p class="section-intro">[Ce que tu fais en dehors des études — passions, sports, engagements.]</p>
+    <p class="section-intro">Cinéma, livres, sport et regard tourné vers les étoiles — ce qui me nourrit en dehors de la technique.</p>
   </div>
 
   <div class="interests">
     <div class="interest reveal">
-      <div class="interest-icon">♫</div>
-      <div class="interest-name">[Intérêt 1]</div>
+      <div class="interest-icon">▶</div>
+      <div class="interest-name">Cinéma</div>
     </div>
     <div class="interest reveal">
-      <div class="interest-icon">⚙</div>
-      <div class="interest-name">[Intérêt 2]</div>
+      <div class="interest-icon">❦</div>
+      <div class="interest-name">Lecture</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">⚡</div>
+      <div class="interest-name">Karaté · Capoeira</div>
+    </div>
+    <div class="interest reveal">
+      <div class="interest-icon">●</div>
+      <div class="interest-name">Basket</div>
     </div>
     <div class="interest reveal">
       <div class="interest-icon">✦</div>
-      <div class="interest-name">[Intérêt 3]</div>
+      <div class="interest-name">Astronomie</div>
     </div>
     <div class="interest reveal">
-      <div class="interest-icon">▲</div>
-      <div class="interest-name">[Intérêt 4]</div>
-    </div>
-    <div class="interest reveal">
-      <div class="interest-icon">○</div>
-      <div class="interest-name">[Intérêt 5]</div>
-    </div>
-    <div class="interest reveal">
-      <div class="interest-icon">✕</div>
-      <div class="interest-name">[Intérêt 6]</div>
+      <div class="interest-icon">🌐</div>
+      <div class="interest-name">Anglais · Espagnol</div>
     </div>
   </div>
 </section>
@@ -1023,19 +1053,19 @@ footer {
 <section class="contact" id="contact">
   <div class="contact-eyebrow reveal">07 — On se parle ?</div>
   <h2 class="contact-title reveal">Travaillons <em>ensemble</em>.</h2>
-  <a href="mailto:[ton@email.fr]" class="contact-email reveal">[ton@email.fr]</a>
+  <a href="mailto:lnouiouichared@gmail.com" class="contact-email reveal">lnouiouichared@gmail.com</a>
   <div class="contact-info reveal">
-    <span>[+33 X XX XX XX XX]</span>
+    <span>+33 6 51 28 88 74</span>
+    <span>Brest · France</span>
     <a href="#">LinkedIn ↗</a>
-    <a href="#">GitHub ↗</a>
     <a href="#">CV ↗</a>
   </div>
 </section>
 
 <!-- =============== FOOTER =============== -->
 <footer>
-  <div>© 2025 [Ton nom]. Tous droits réservés.</div>
-  <div>Portfolio · BUT GEII · Promotion 2022-2025</div>
+  <div>© 2025 Lehyan Nouioui-Chared. Tous droits réservés.</div>
+  <div>Portfolio · BUT GEII AII · Promotion 2023-2026</div>
 </footer>
 
 <script>
